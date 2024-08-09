@@ -4,6 +4,7 @@ import com.prototyne.domain.common.BaseEntity;
 import com.prototyne.domain.enums.Gender;
 import com.prototyne.domain.mapping.Additional;
 import com.prototyne.domain.mapping.Heart;
+import com.prototyne.web.dto.DeliveryDto;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
@@ -55,6 +56,15 @@ public class User extends BaseEntity {
     @ColumnDefault("false")
     private Boolean signupComplete;
 
+    @Column(length = 20)
+    private String deliveryName;
+
+    @Column(length = 20)
+    private String deliveryPhone;
+
+    @Column(length = 200)
+    private String deliveryAddress;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Investment> investmentList = new ArrayList<>();
 
@@ -72,4 +82,11 @@ public class User extends BaseEntity {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Feedback> feedbackList = new ArrayList<>();
+
+    public void setDelivery(DeliveryDto deliveryDto) {
+        this.deliveryName = deliveryDto.getDeliveryName();
+        System.out.println("deliveryDto.getDeliveryPhone() = " + deliveryDto.getDeliveryPhone());
+        this.deliveryPhone = deliveryDto.getDeliveryPhone();
+        this.deliveryAddress = deliveryDto.getDeliveryAddress();
+    }
 }

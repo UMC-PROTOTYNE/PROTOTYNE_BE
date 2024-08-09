@@ -1,6 +1,7 @@
 package com.prototyne.converter;
 
 import com.prototyne.domain.User;
+import com.prototyne.web.dto.DeliveryDto;
 import com.prototyne.web.dto.UserDto;
 import org.springframework.stereotype.Component;
 
@@ -23,6 +24,14 @@ public class UserConverter {
                 .tickets(user.getTickets())
                 .gender(user.getGender())
                 .birth(user.getBirth())
+                .build();
+    }
+
+    public static DeliveryDto toDeliveryDto(User user) {
+        return DeliveryDto.builder()
+                .deliveryName(user.getDeliveryName())
+                .deliveryPhone(user.getDeliveryPhone())
+                .deliveryAddress(user.getDeliveryAddress())
                 .build();
     }
 }

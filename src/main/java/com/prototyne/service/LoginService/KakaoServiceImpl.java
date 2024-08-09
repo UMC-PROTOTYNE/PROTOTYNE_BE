@@ -79,7 +79,7 @@ public class KakaoServiceImpl implements KakaoService {
     @Override
     public UserDto.UserRequest getUserInfo(String accessToken) {
         Long id = jwtManager.validateJwt(accessToken);
-        log.info("id : {}", id);
+//        log.info("id : {}", id);
         User user = userRepository.findById(id).orElseThrow(() -> new TempHandler(ErrorStatus.LOGIN_ERROR_ID));
         return UserConverter.toUserInfoDto(user);
     }

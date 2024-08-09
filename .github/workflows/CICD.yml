@@ -73,7 +73,7 @@ jobs:
             echo "TARGET_UPSTREAM=blue" >> $GITHUB_ENV
           fi
 
-      - name: Docker compose
+      - name: Deploy new version
         uses: appleboy/ssh-action@master
         with:
           username: ubuntu
@@ -82,7 +82,7 @@ jobs:
           script_stop: true
           script: |
             sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/live_server:latest
-            sudo docker-compose -f docker-compose-${{env.TARGET_UPSTREAM}}.yml up -d
+            sudo docker-compose -f docker-compose-${{env.TARGET_UPSTREAM}}.yml up -d --remove-orphans
       
       - name: Wait for server to start
         run: sleep 30  # 서버가 시작될 시간을 확보

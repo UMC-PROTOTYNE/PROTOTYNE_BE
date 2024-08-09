@@ -22,8 +22,7 @@ public class LoginController {
     @Tag(name = "${swagger.tag.auth}")
     @GetMapping("/login")
     @Operation(summary = "로그인 API",
-            description = "Access Token 응답",
-            security = {@SecurityRequirement(name = "session-token")})
+            description = "Access Token 응답")
     public ApiResponse<UserDto.KakaoTokenResponse> callback(@RequestParam("code") String code) {
         UserDto.KakaoTokenResponse accessToken = kakaoService.getAccessToken(code);
         return ApiResponse.onSuccess(accessToken);
